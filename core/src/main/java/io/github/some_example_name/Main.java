@@ -57,7 +57,8 @@ public class Main implements ApplicationListener {
         layout = new GlyphLayout();
         font = new BitmapFont();
         font.setColor(Color.WHITE);
-        font.getData().setScale(0.05f);
+        font.setUseIntegerPositions(false);
+        font.getData().setScale(viewport.getWorldHeight() / Gdx.graphics.getHeight() + 0.05f);
 
         score = 0;
         lives = 3;
@@ -166,15 +167,15 @@ public class Main implements ApplicationListener {
             for (Sprite dropSprite : dropSprites) {
                 dropSprite.draw(spriteBatch);
             }
-            layout.setText(font, "" + lives);
-            font.draw(spriteBatch, layout, 7f, worldHeight - 4f);
+            layout.setText(font, "lives: " + lives);
+            font.draw(spriteBatch, layout, 0f, worldHeight - 0.2f);
 
         } else {
             spriteBatch.draw(restartTexture, restartButtonBounds.x, restartButtonBounds.y,
                 restartButtonBounds.width, restartButtonBounds.height);
 
-            layout.setText(font, String.valueOf(score));
-            font.draw(spriteBatch, layout, 0f, 4.5f);
+            layout.setText(font, "score: " +  String.valueOf(score));
+            font.draw(spriteBatch, layout, 2.5f, 4.5f);
         }
 
         spriteBatch.end();
